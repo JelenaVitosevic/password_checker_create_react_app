@@ -1,0 +1,29 @@
+.table_wrapper {
+    padding: 0.625rem 0;
+}
+
+table {
+    margin: 0 auto;
+    width: 50%;
+    cursor: default;
+}
+
+table, th, td {
+    border: 3px solid #5a189a;
+    border-collapse: collapse;
+    height: 8vh;
+    padding: 0.625rem;
+  }
+
+th {
+    background-color: #5a189a;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+td {
+    background-color: #fff;
+    color: #5a189a;
+    text-align: center;
+    font-weight: bold;
+}

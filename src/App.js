@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import SubmitForm from "./components/submitForm/SubmitForm";
+import Table from "./components/table/Table";
+import { useState } from "react";
+import './style.css';
 
 function App() {
+  const [passwordValue, setPasswordValue] = useState('');
+  const [sums, setSums] = useState();
+
+  const getPassword = (e) => setPasswordValue(e.target.value);
+ 
+  const handleClickFetch = async () => {
+    const dataToSend = {
+        password: passwordValue
+    }
+    const checkPassword = await fetch('http://localhost:5000/passwordChecker', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataToSend)
+    });
+    const content = await checkPassword.json();
+
+    setSums(content);
+    console.log(sums)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1 className="content_title">PASSWORD STRENGTH CHECKER</h1>
+      <SubmitForm function1={getPassword} inputValue={passwordValue} function2={handleClickFetch}/>
+      <Table answer={sums}/>
     </div>
   );
 }
